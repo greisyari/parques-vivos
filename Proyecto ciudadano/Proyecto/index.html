@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parques Vivos - Cuidado Ciudadano</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Playfair Display & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            forest: '#2D4A3E',
+                            olive: '#3B5D4E',
+                            lightgreen: '#527866',
+                            beige: '#F5F2EB',
+                            sand: '#E8E2D5',
+                            charcoal: '#2C302E',
+                            alert: '#8C4A32'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F5F2EB;
+            color: #2C302E;
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F2EB;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B5D4E;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2D4A3E;
+        }
+    </style>
+</head>
+<body class="bg-brand-beige text-brand-charcoal flex flex-col min-h-screen">
+
+    <!-- Header / Nav -->
+    <header class="sticky top-0 z-50 bg-brand-beige/90 backdrop-blur-md border-b border-brand-sand transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#inicio" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-full bg-brand-forest flex items-center justify-center text-brand-beige shadow-sm transition-transform group-hover:scale-105">
+                        <i class="fa-solid font-bold fa-leaf text-lg"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-playfair font-bold text-xl text-brand-forest tracking-wide leading-tight">Parques Vivos</span>
+                        <span class="text-xs text-brand-lightgreen font-medium tracking-widest uppercase">Proyecto Ciudadano</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#inicio" class="font-medium text-brand-charcoal hover:text-brand-forest transition-colors py-1">Inicio</a>
+                    <a href="voluntariado.html" class="font-medium text-brand-charcoal hover:text-brand-forest transition-colors py-1">Voluntariado</a>
+                    
+                    <!-- Contador de Visualizaciones en Navegación -->
+                    <div class="flex items-center gap-1.5 bg-brand-sand/60 px-3 py-1.5 rounded-full text-xs font-semibold text-brand-forest border border-brand-sand">
+                        <i class="fa-solid fa-eye text-brand-lightgreen"></i>
+                        <span id="page-views-nav">...</span>
+                        <span class="text-[10px] text-brand-charcoal/60 font-normal">visitas</span>
+                    </div>
+
+                    <a href="urgente.html" class="bg-brand-alert text-brand-beige px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all shadow-sm hover:shadow flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-xs"></i> Urgente
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-brand-forest text-2xl focus:outline-none p-2" aria-label="Abrir menú">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-beige border-b border-brand-sand px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" class="block py-2 font-medium text-brand-charcoal hover:text-brand-forest border-b border-brand-sand/50">Inicio</a>
+            <a href="voluntariado.html" class="block py-2 font-medium text-brand-charcoal hover:text-brand-forest border-b border-brand-sand/50">Voluntariado</a>
+            
+            <div class="flex items-center justify-between py-2 border-b border-brand-sand/50 text-xs">
+                <span class="text-brand-charcoal/80 font-medium">Visualizaciones de la página:</span>
+                <span class="bg-brand-sand/80 px-2.5 py-1 rounded-full font-bold text-brand-forest" id="page-views-mobile">...</span>
+            </div>
+
+            <a href="urgente.html" class="inline-block mt-2 bg-brand-alert text-brand-beige px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all w-full text-center">
+                <i class="fa-solid fa-triangle-exclamation text-xs mr-2"></i> Urgente
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+
+        <!-- Hero Section -->
+        <section id="inicio" class="relative py-10 lg:py-28 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-sand/70 text-brand-forest text-xs font-semibold tracking-wider uppercase">
+                            <i class="fa-solid fa-users text-xs"></i> Iniciativa Ciudadana Unida
+                        </span>
+
+                        <h1 class="font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold text-brand-forest leading-tight">
+                            Con un solo click cuida el bienestar de tu familia
+                        </h1>
+                        
+                        <p class="text-lg text-brand-charcoal/80 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            Transformemos los espacios públicos en refugios seguros, limpios y libres de contaminación para nuestros niños y seres queridos. Tu participación activa cambia el entorno de nuestra comunidad.
+                        </p>
+
+                        <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="voluntariado.html" class="bg-brand-forest text-brand-beige px-8 py-4 rounded-full font-semibold hover:bg-brand-olive transition-all shadow-md hover:shadow-lg text-center flex items-center justify-center gap-3">
+                                <span>Sumarme al Proyecto</span>
+                                <i class="fa-solid fa-arrow-right text-sm"></i>
+                            </a>
+                            <a href="#impacto" class="border border-brand-forest/30 text-brand-forest px-8 py-4 rounded-full font-semibold hover:bg-brand-sand/50 transition-all text-center">
+                                Saber Más
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Visual Hero Card -->
+                    <div class="lg:col-span-5">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <div class="bg-brand-sand/60 rounded-3xl p-6 sm:p-8 border border-brand-sand shadow-sm relative z-10 backdrop-blur-sm">
+                                <div class="relative h-64 sm:h-72 rounded-2xl overflow-hidden mb-6 bg-brand-olive/20 flex items-center justify-center">
+                                    <i class="fa-solid fa-tree text-9xl text-brand-olive/40 absolute -bottom-4"></i>
+                                    <div class="text-center p-6 relative z-10">
+                                        <div class="w-16 h-16 bg-brand-beige rounded-full flex items-center justify-center mx-auto mb-3 shadow-sm text-brand-forest text-2xl">
+                                            <i class="fa-solid fa-heart-pulse"></i>
+                                        </div>
+                                        <h3 class="font-playfair font-bold text-xl text-brand-forest">Parques Saludables</h3>
+                                        <p class="text-xs text-brand-charcoal/70 mt-1">El pulmón de nuestro vecindario merece nuestra protección constante.</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-center">
+                                    <div class="bg-brand-beige p-3.5 rounded-xl border border-brand-sand/60">
+                                        <span class="block font-bold text-2xl text-brand-forest font-playfair">+85%</span>
+                                        <span class="text-xs text-brand-charcoal/70">Áreas Recuperables</span>
+                                    </div>
+                                    <div class="bg-brand-beige p-3.5 rounded-xl border border-brand-sand/60">
+                                        <span class="block font-bold text-2xl text-brand-forest font-playfair">100%</span>
+                                        <span class="text-xs text-brand-charcoal/70">Compromiso Social</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Background Accent -->
+                            <div class="absolute -bottom-4 -right-4 w-full h-full bg-brand-olive/10 rounded-3xl -z-10"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Filter / Interactive Tabs Section -->
+        <section id="impacto" class="py-16 bg-white/60 border-y border-brand-sand">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="font-playfair text-3xl sm:text-4xl font-bold text-brand-forest mb-4">
+                        Nuestros Ejes de Acción Ciudadana
+                    </h2>
+                    <p class="text-brand-charcoal/80">
+                        Explora la información clave sobre cómo la conservación activa de nuestras áreas verdes protege directamente la salud física y social de la comunidad.
+                    </p>
+
+                    <div class="flex flex-wrap justify-center gap-2 mt-8">
+                        <button onclick="switchTab('contaminacion')" id="tab-contaminacion" class="tab-btn active px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-forest text-brand-beige shadow-sm">
+                            <i class="fa-solid fa-dumpster mr-2"></i> Contaminación
+                        </button>
+                        <button onclick="switchTab('areas-verdes')" id="tab-areas-verdes" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-beige text-brand-charcoal hover:bg-brand-sand">
+                            <i class="fa-solid fa-seedling mr-2"></i> Áreas Verdes
+                        </button>
+                        <button onclick="switchTab('salud-publica')" id="tab-salud-publica" class="tab-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-beige text-brand-charcoal hover:bg-brand-sand">
+                            <i class="fa-solid fa-ban-smoking mr-2"></i> Alcohol y Normativa
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tab 1: La Contaminación -->
+                <div id="content-contaminacion" class="tab-content transition-all duration-300">
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-brand-beige p-8 rounded-2xl border border-brand-sand hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-brand-sand/80 rounded-xl flex items-center justify-center text-brand-forest text-xl mb-6">
+                                <i class="fa-solid fa-microscope"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-brand-forest mb-3">Impacto Microbiano</h3>
+                            <p class="text-sm text-brand-charcoal/80 leading-relaxed">
+                                Los residuos orgánicos mal dispuestados atraen plagas y bacterias, incrementando en un 35% los riesgos de infecciones dermatológicas y digestivas en niños que juegan sobre el césped.
+                            </p>
+                        </div>
+
+                        <div class="bg-brand-beige p-8 rounded-2xl border border-brand-sand hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-brand-sand/80 rounded-xl flex items-center justify-center text-brand-forest text-xl mb-6">
+                                <i class="fa-solid fa-bottle-droplet"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-brand-forest mb-3">Plásticos y Vidrios</h3>
+                            <p class="text-sm text-brand-charcoal/80 leading-relaxed">
+                                Los objetos punzocortantes y plásticos de un solo uso representan la causa principal de accidentes infantiles y contaminación persistente en los suelos parqueales.
+                            </p>
+                        </div>
+
+                        <div class="bg-brand-beige p-8 rounded-2xl border border-brand-sand hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-brand-sand/80 rounded-xl flex items-center justify-center text-brand-forest text-xl mb-6">
+                                <i class="fa-solid fa-dove"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-brand-forest mb-3">Fauna Urbana en Riesgo</h3>
+                            <p class="text-sm text-brand-charcoal/80 leading-relaxed">
+                                La ingesta accidental de desecho sintético afecta la vida silvestre local (aves, ardillas y mascotas), alterando el ecosistema de nuestros micro-hábitats urbanos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Áreas Verdes -->
+                <div id="content-areas-verdes" class="tab-content hidden transition-all duration-300">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-brand-beige p-8 rounded-2xl border border-brand-sand hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-brand-olive/10 rounded-xl flex items-center justify-center text-brand-olive text-xl mb-6">
+                                <i class="fa-solid fa-wind"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-brand-forest mb-3">Purificación del Aire</h3>
+                            <p class="text-sm text-brand-charcoal/80 leading-relaxed">
+                                Un parque denso en flora captura toneladas de CO2 al año y filtra partículas contaminantes, brindando aire puro directamente a los hogares vecinos.
+                            </p>
+                        </div>
+
+                        <div class="bg-brand-beige p-8 rounded-2xl border border-brand-sand hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-brand-olive/10 rounded-xl flex items-center justify-center text-brand-olive text-xl mb-6">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-brand-forest mb-3">Salud Mental y Convivencia</h3>
+                            <p class="text-sm text-brand-charcoal/80 leading-relaxed">
+                                Espacios verdes limpios reducen los niveles de cortisol (estrés) y fomentan la interacción intergeneracional positiva en un ambiente pacífico.
+                            </p>
+                        </div>
+
+                        <div class="bg-brand-beige p-8 rounded-2xl border border-brand-sand hover:shadow-md transition-shadow md:col-span-2 lg:col-span-1">
+                            <div class="w-12 h-12 bg-brand-olive/10 rounded-xl flex items-center justify-center text-brand-olive text-xl mb-6">
+                                <i class="fa-solid fa-hand-holding-hand"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl font-bold text-brand-forest mb-3">Decálogo del Buen Vecino</h3>
+                            <ul class="text-xs text-brand-charcoal/80 space-y-2">
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-olive"></i> Recoge siempre las heces de tus mascotas.</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-olive"></i> No pises las áreas de reforestación joven.</li>
+                                <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-olive"></i> Utiliza los tachos diferenciados de reciclar.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Alcohol y Normativa -->
+                <div id="content-salud-publica" class="tab-content hidden transition-all duration-300">
+                    <div class="bg-brand-beige p-8 rounded-3xl border border-brand-sand max-w-4xl mx-auto shadow-sm">
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="w-16 h-16 bg-brand-alert/10 rounded-2xl flex items-center justify-center text-brand-alert text-2xl flex-shrink-0">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div class="space-y-4">
+                                <h3 class="font-playfair text-2xl font-bold text-brand-forest">Protección Ciudadana y Espacios Seguros</h3>
+                                
+                                <blockquote class="border-l-4 border-brand-olive pl-4 py-1 italic text-brand-charcoal/90 text-sm md:text-base">
+                                    "Según el <strong>Ministerio de Salud (MINSA)</strong>, el consumo excesivo de bebidas alcohólicas repercute negativamente en la salud física y la estabilidad comunitaria. Asimismo, los envases de vidrio o lata abandonados en áreas públicas constituyen un alto riesgo de contaminación, cortes accidentales y degradación del bienestar social de las familias."
+                                </blockquote>
+
+                                <div class="grid sm:grid-cols-2 gap-4 pt-2">
+                                    <div class="p-4 bg-white/80 rounded-xl border border-brand-sand">
+                                        <h4 class="font-bold text-sm text-brand-forest mb-1">Riesgo Ambiental</h4>
+                                        <p class="text-xs text-brand-charcoal/70">Las botellas de vidrio actúan como lupa bajo el sol pudiendo generar incendios en el césped seco, además de no degradarse en cientos de años.</p>
+                                    </div>
+                                    <div class="p-4 bg-white/80 rounded-xl border border-brand-sand">
+                                        <h4 class="font-bold text-sm text-brand-forest mb-1">Convivencia Familiar</h4>
+                                        <p class="text-xs text-brand-charcoal/70">Mantener los parques libres de alcohol promueve un entorno seguro y de valores constructivos para las niñas y niños del vecindario.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-forest text-brand-beige py-12 border-t border-brand-olive">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-brand-olive/50">
+                
+                <div class="md:col-span-2 space-y-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-leaf text-brand-beige text-xl"></i>
+                        <span class="font-playfair font-bold text-2xl">Parques Vivos</span>
+                    </div>
+                    <p class="text-xs text-brand-beige/70 max-w-sm leading-relaxed">
+                        Proyecto Ciudadano dedicado a la concienciación, protección y recuperación activa de los parques y áreas verdes urbanas para el bienestar de las familias.
+                    </p>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-sm mb-3 text-brand-beige font-playfair">Enlaces Rápidos</h5>
+                    <ul class="space-y-2 text-xs text-brand-beige/80">
+                        <li><a href="#inicio" class="hover:underline">Inicio</a></li>
+                        <li><a href="#impacto" class="hover:underline">Ejes de Acción</a></li>
+                        <li><a href="voluntariado.html" class="hover:underline">Unirse al Voluntariado</a></li>
+                        <li><a href="urgente.html" class="hover:underline">Reportes Urgentes</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-sm mb-3 text-brand-beige font-playfair">Redes Comunitarias</h5>
+                    <div class="flex gap-3 text-base">
+                        <a href="#" class="w-9 h-9 rounded-full bg-brand-olive flex items-center justify-center hover:bg-brand-beige hover:text-brand-forest transition-colors" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-brand-olive flex items-center justify-center hover:bg-brand-beige hover:text-brand-forest transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-brand-olive flex items-center justify-center hover:bg-brand-beige hover:text-brand-forest transition-colors" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-brand-beige/60 gap-4">
+                <p>Todos los derechos reservados © Proyecto Ciudadano Parques Vivos</p>
+                <p>Cuidando juntos nuestro espacio público</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Custom Alert / Modal -->
+    <div id="custom-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-brand-beige max-w-md w-full rounded-3xl p-6 sm:p-8 border border-brand-sand shadow-xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-brand-charcoal/50 hover:text-brand-charcoal text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center space-y-4">
+                <div class="w-12 h-12 bg-brand-forest/10 text-brand-forest rounded-full flex items-center justify-center mx-auto text-xl">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                </div>
+                <h3 class="font-playfair text-2xl font-bold text-brand-forest">Reporte Exprés</h3>
+                <p class="text-xs text-brand-charcoal/70">
+                    Gracias por contribuir activamente. Ingresa la ubicación y descripción del parque a atender.
+                </p>
+                
+                <input type="text" id="report-location" placeholder="Ej. Parque de las Flores - Cerca a la cancha" class="w-full px-4 py-2.5 rounded-xl border border-brand-sand bg-white text-xs focus:outline-none focus:border-brand-forest">
+                
+                <textarea id="report-desc" rows="3" placeholder="Describe brevemente el problema (ej. Residuos de vidrio sobre el césped)" class="w-full px-4 py-2.5 rounded-xl border border-brand-sand bg-white text-xs focus:outline-none focus:border-brand-forest"></textarea>
+                
+                <button onclick="sendReport()" class="w-full bg-brand-forest text-brand-beige text-xs font-bold py-3 rounded-xl hover:bg-brand-olive transition-all">
+                    Enviar Reporte a la Comunidad
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Banner Container -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-brand-forest text-brand-beige px-6 py-3.5 rounded-2xl shadow-lg border border-brand-olive flex items-center gap-3 text-xs font-medium">
+        <i class="fa-solid fa-circle-check text-base text-brand-sand"></i>
+        <span id="toast-message">¡Acción realizada con éxito!</span>
+    </div>
+
+    <!-- Scripts de Interacción Local -->
+    <script>
+        // Toggle Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Interactive Tabs Logic
+        function switchTab(tabKey) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-forest', 'text-brand-beige', 'shadow-sm');
+                btn.classList.add('bg-brand-beige', 'text-brand-charcoal');
+            });
+
+            const targetContent = document.getElementById(`content-${tabKey}`);
+            if (targetContent) targetContent.classList.remove('hidden');
+
+            const activeBtn = document.getElementById(`tab-${tabKey}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-brand-beige', 'text-brand-charcoal');
+                activeBtn.classList.add('bg-brand-forest', 'text-brand-beige', 'shadow-sm');
+            }
+        }
+
+        // Custom Modal Logic
+        function openModal() {
+            const modal = document.getElementById('custom-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('custom-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function sendReport() {
+            const locInput = document.getElementById('report-location');
+            const loc = locInput ? locInput.value : '';
+            if(!loc) {
+                showToast('Por favor indica la ubicación del parque.');
+                return;
+            }
+            closeModal();
+            showToast('Reporte ciudadano enviado con éxito.');
+            if (locInput) locInput.value = '';
+            const descInput = document.getElementById('report-desc');
+            if (descInput) descInput.value = '';
+        }
+
+        // Toast Feedback Function
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            if (toast && toastMsg) {
+                toastMsg.innerText = message;
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 4000);
+            }
+        }
+    </script>
+
+    <!-- Script Modular de Firebase: Contador de Visitas en Tiempo Real -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
+        import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-JhnfvltTQA7MrkBjXDJWITZU63a5Hhw",
+            authDomain: "proyecto-ciudadano-b671e.firebaseapp.com",
+            projectId: "proyecto-ciudadano-b671e",
+            storageBucket: "proyecto-ciudadano-b671e.firebasestorage.app",
+            messagingSenderId: "109555009244",
+            appId: "1:109555009244:web:80aa89b13113abf195d619"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Referencia al documento 'contador' en Firestore
+        const contadorRef = doc(db, "mecanicas", "contador");
+
+        const navViews = document.getElementById('page-views-nav');
+        const mobileViews = document.getElementById('page-views-mobile');
+
+        // 1. ESCUCHAR CAMBIOS EN TIEMPO REAL
+        onSnapshot(contadorRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const totalViews = snapshot.data().total || 0;
+                if (navViews) navViews.innerText = totalViews;
+                if (mobileViews) mobileViews.innerText = totalViews;
+            } else {
+                // Si el documento aún no existe en Firebase, lo crea
+                setDoc(contadorRef, { total: 1 });
+            }
+        });
+
+        // 2. INCREMENTAR VISITA CADA VEZ QUE SE ENTRA A LA PÁGINA
+        async function registrarVisita() {
+            try {
+                await updateDoc(contadorRef, {
+                    total: increment(1)
+                });
+            } catch (error) {
+                console.log("Inicializando contador de visitas por primera vez...");
+            }
+        }
+
+        // Ejecutar registro al cargar
+        registrarVisita();
+    </script>
+</body>
+</html>
